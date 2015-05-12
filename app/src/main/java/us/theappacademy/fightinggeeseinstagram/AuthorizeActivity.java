@@ -1,6 +1,7 @@
 package us.theappacademy.fightinggeeseinstagram;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 
@@ -20,12 +21,19 @@ public class AuthorizeActivity extends OAuthActivity {
 
     @Override
     public void setLayoutView() {
+        replaceCurrentFragment(new ProfileFragment(), false);
 
     }
 
     @Override
     public void replaceCurrentFragment(Fragment newFragment, boolean addToStack) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
+        fragmentTransaction.replace(R.id.fragmentContainer, newFragment);
+                if(addToStack){
+                 fragmentTransaction.addToBackStack(null);
+                }
+        fragmentTransaction.commit();
     }
 
     @Override
